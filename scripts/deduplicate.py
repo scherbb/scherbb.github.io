@@ -77,6 +77,8 @@ def normalize_pool_name(name):
         return 'Акватория «ЗИЛ»'
     if 'Янтарь' in s:
         return 'ДС «Янтарь»'
+    if 'Динамо' in s:
+        return 'МСК «Динамо»'
     return s
 
 
