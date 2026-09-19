@@ -43,6 +43,8 @@ PROTOCOLS = [
     {"name": "2025_12_14_4tour_7", "date": "2025-12-14", "meet": "НАСТАРТ IV тур 2025"},
     {"name": "2026_04_12_3tour", "date": "2026-04-12", "meet": "НАСТАРТ III тур 2026"},
     {"name": "2026_17_05_4tour", "date": "2026-05-17", "meet": "НАСТАРТ IV тур 2026"},
+    {"name": "2026_07_19_doptour", "date": "2026-07-19", "meet": "НАСТАРТ Доп тур 2026"},
+    {"name": "2026_08_30_5tour", "date": "2026-08-30", "meet": "НАСТАРТ V тур 2026"},
 ]
 
 def detect_pool_length(pdf_path):
@@ -118,7 +120,8 @@ def detect_pool_name(pdf_path):
         return 'ДС «Янтарь»'
     if re.search(r'Олимпийск', combined, re.IGNORECASE):
         return 'Олимпийский'
-    
+    if re.search(r'Динамо', combined, re.IGNORECASE):
+        return 'МСК «Динамо»'
     return None
 
 
@@ -221,7 +224,7 @@ def parse_pdfplumber(pdf_path, meta):
         r'([А-ЯЁ][А-ЯЁа-яё\-]+)\s+'
         r'([А-ЯЁ][а-яё\-]+(?:\s+[А-ЯЁ][а-яё\-]+)?)\s+'
         r'(\d{2}\.\d{2}\.\d{4}|\d{4})\s+'
-        r'(.+?)\s+'
+        r'(.+?)\s*'
         r'(\d{1,2}:\d{2}\.\d{2}|\d+\.\d{2})\s*'
         r'(\d+)?\s*'
     )
@@ -235,7 +238,7 @@ def parse_pdfplumber(pdf_path, meta):
         r'^\s*([А-ЯЁ][А-ЯЁа-яё\-]{2,})\s+'
         r'([А-ЯЁ][а-яё\-]+(?:\s+[А-ЯЁ][а-яё\-]+)?)\s+'
         r'(\d{2}\.\d{2}\.\d{4}|\d{4})\s+'
-        r'(.+?)\s+'
+        r'(.+?)\s*'
         r'(\d{1,2}:\d{2}\.\d{2}|\d+\.\d{2})\s*'
         r'(\d+)?\s*'
     )
